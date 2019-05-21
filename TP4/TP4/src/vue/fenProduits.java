@@ -633,10 +633,14 @@ public class fenProduits extends javax.swing.JFrame {
 
 //Handler de synchronisation
     private void synchroniser(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_synchroniser
-        String L, P, Q = " ";
+        String L, P, Q ,C , SC = " ";
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
         L = (String) model.getValueAt(jTable.getSelectedRow(), 0);
         textLib.setText(L);
+        C =(String) model.getValueAt(jTable.getSelectedRow(), 1);
+        cbCat.setSelectedItem(C);
+        SC = (String) model.getValueAt(jTable.getSelectedRow(), 2);
+        listSousCat.setSelectedValue(SC, rootPaneCheckingEnabled);
         P = (String) model.getValueAt(jTable.getSelectedRow(), 3);
         textPrix.setText(P);
         Q = (String) model.getValueAt(jTable.getSelectedRow(), 4);
