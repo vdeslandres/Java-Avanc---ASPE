@@ -16,6 +16,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
@@ -50,7 +51,6 @@ public class fenProduits extends javax.swing.JFrame {
     private final DefaultListModel lecteurDVD;
     private final DefaultListModel appPhoto;
     private final DefaultListModel casqueAudio;
-    private JList listeDD;
 
     /**
      * Creates new form fenProduits
@@ -116,6 +116,7 @@ public class fenProduits extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         btAide = new javax.swing.JButton();
         btAPropos = new javax.swing.JButton();
+        btAfficher = new javax.swing.JButton();
         mbMenu = new javax.swing.JMenuBar();
         mFichier = new javax.swing.JMenu();
         miExport = new javax.swing.JMenuItem();
@@ -128,7 +129,7 @@ public class fenProduits extends javax.swing.JFrame {
             }
         });
 
-        panCarac.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Caractéristiques produits", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 10))); // NOI18N
+        panCarac.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Caractéristiques produits", 0, 0, new java.awt.Font("Tahoma", 2, 10))); // NOI18N
 
         libLib.setText("Libellé");
 
@@ -339,6 +340,17 @@ public class fenProduits extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(btAPropos);
+
+        btAfficher.setText("Afficher");
+        btAfficher.setFocusable(false);
+        btAfficher.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btAfficher.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btAfficher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAfficherActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btAfficher);
 
         mFichier.setText("Fichier");
 
@@ -643,78 +655,82 @@ public class fenProduits extends javax.swing.JFrame {
 
 //Bouton Modifier
     private void btModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModifActionPerformed
-        String Lib;
-        String C = "";
-        String SC = "Pas de sous catégorie";
-        String Px;
-        String Q;
-        if (cbCat.getSelectedIndex() == 0) {
-            C = "Disque Dur";
-            if (!disqueDur.isEmpty()) {
-                if (listSousCat.getSelectedValue() == null) {
-                    JOptionPane.showMessageDialog(this, "Aucune sous-catégorie n'a été sélectionnée", "Erreur de sélection", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    SC = listSousCat.getSelectedValue();
-                }
-            }
-        }
-        if (cbCat.getSelectedIndex() == 1) {
-            C = "Souris";
-            if (!souris.isEmpty()) {
-                if (listSousCat.getSelectedValue() == null) {
-                    JOptionPane.showMessageDialog(this, "Aucune sous-catégorie n'a été sélectionnée", "Erreur de sélection", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    SC = listSousCat.getSelectedValue();
-                }
-            }
-        }
-        if (cbCat.getSelectedIndex() == 2) {
-            C = "Lecteur DVD";
-            if (!lecteurDVD.isEmpty()) {
-                if (listSousCat.getSelectedValue() == null) {
-                    JOptionPane.showMessageDialog(this, "Aucune sous-catégorie n'a été sélectionnée", "Erreur de sélection", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    SC = listSousCat.getSelectedValue();
-                }
-            }
-        }
-        if (cbCat.getSelectedIndex() == 3) {
-            C = "Casque Audio";
-            if (!casqueAudio.isEmpty()) {
-                if (listSousCat.getSelectedValue() == null) {
-                    JOptionPane.showMessageDialog(this, "Aucune sous-catégorie n'a été sélectionnée", "Erreur de sélection", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    SC = listSousCat.getSelectedValue();
-                };
-            }
-        }
-        if (cbCat.getSelectedIndex() == 4) {
-            C = "Appareil Photo";
-            if (!appPhoto.isEmpty()) {
-                if (listSousCat.getSelectedValue() == null) {
-                    JOptionPane.showMessageDialog(this, "Aucune sous-catégorie n'a été sélectionnée", "Erreur de sélection", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    SC = listSousCat.getSelectedValue();
-                }
-            }
-        }
-        Lib = textLib.getText();
-        Px = textPrix.getText();
-        Q = textQuant.getText();
-        String regex = "[0-9]*";
-        if (Lib.equals("")) { //libellé vide
-            JOptionPane.showMessageDialog(this, "Le libellé est vide", "Erreur de saisie", JOptionPane.INFORMATION_MESSAGE);
-        } else if (!Px.matches(regex) || Px.equals("")) { // si prix vide, non numérique 
-            JOptionPane.showMessageDialog(this, "Le prix est vide ou erroné", "Erreur de saisie", JOptionPane.INFORMATION_MESSAGE);
-        } else if (!Q.matches(regex) || Q.equals("")) { // si prix vide, non numérique 
-            JOptionPane.showMessageDialog(this, "La quantité est vide ou erronée", "Erreur de saisie", JOptionPane.INFORMATION_MESSAGE);
+        if (jTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Aucune ligne n'a été sélectionnée", "Erreur de sélection", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-            model.setValueAt(Lib, jTable.getSelectedRow(), 0);
-            model.setValueAt(C, jTable.getSelectedRow(), 1);
-            model.setValueAt(SC, jTable.getSelectedRow(), 2);
-            model.setValueAt(Px, jTable.getSelectedRow(), 3);
-            model.setValueAt(Q, jTable.getSelectedRow(), 4);
+            String Lib;
+            String C = "";
+            String SC = "Pas de sous catégorie";
+            String Px;
+            String Q;
+            if (cbCat.getSelectedIndex() == 0) {
+                C = "Disque Dur";
+                if (!disqueDur.isEmpty()) {
+                    if (listSousCat.getSelectedValue() == null) {
+                        JOptionPane.showMessageDialog(this, "Aucune sous-catégorie n'a été sélectionnée", "Erreur de sélection", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        SC = listSousCat.getSelectedValue();
+                    }
+                }
+            }
+            if (cbCat.getSelectedIndex() == 1) {
+                C = "Souris";
+                if (!souris.isEmpty()) {
+                    if (listSousCat.getSelectedValue() == null) {
+                        JOptionPane.showMessageDialog(this, "Aucune sous-catégorie n'a été sélectionnée", "Erreur de sélection", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        SC = listSousCat.getSelectedValue();
+                    }
+                }
+            }
+            if (cbCat.getSelectedIndex() == 2) {
+                C = "Lecteur DVD";
+                if (!lecteurDVD.isEmpty()) {
+                    if (listSousCat.getSelectedValue() == null) {
+                        JOptionPane.showMessageDialog(this, "Aucune sous-catégorie n'a été sélectionnée", "Erreur de sélection", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        SC = listSousCat.getSelectedValue();
+                    }
+                }
+            }
+            if (cbCat.getSelectedIndex() == 3) {
+                C = "Casque Audio";
+                if (!casqueAudio.isEmpty()) {
+                    if (listSousCat.getSelectedValue() == null) {
+                        JOptionPane.showMessageDialog(this, "Aucune sous-catégorie n'a été sélectionnée", "Erreur de sélection", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        SC = listSousCat.getSelectedValue();
+                    };
+                }
+            }
+            if (cbCat.getSelectedIndex() == 4) {
+                C = "Appareil Photo";
+                if (!appPhoto.isEmpty()) {
+                    if (listSousCat.getSelectedValue() == null) {
+                        JOptionPane.showMessageDialog(this, "Aucune sous-catégorie n'a été sélectionnée", "Erreur de sélection", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        SC = listSousCat.getSelectedValue();
+                    }
+                }
+            }
+            Lib = textLib.getText();
+            Px = textPrix.getText();
+            Q = textQuant.getText();
+            String regex = "[0-9]*";
+            if (Lib.equals("")) { //libellé vide
+                JOptionPane.showMessageDialog(this, "Le libellé est vide", "Erreur de saisie", JOptionPane.INFORMATION_MESSAGE);
+            } else if (!Px.matches(regex) || Px.equals("")) { // si prix vide, non numérique 
+                JOptionPane.showMessageDialog(this, "Le prix est vide ou erroné", "Erreur de saisie", JOptionPane.INFORMATION_MESSAGE);
+            } else if (!Q.matches(regex) || Q.equals("")) { // si prix vide, non numérique 
+                JOptionPane.showMessageDialog(this, "La quantité est vide ou erronée", "Erreur de saisie", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+                model.setValueAt(Lib, jTable.getSelectedRow(), 0);
+                model.setValueAt(C, jTable.getSelectedRow(), 1);
+                model.setValueAt(SC, jTable.getSelectedRow(), 2);
+                model.setValueAt(Px, jTable.getSelectedRow(), 3);
+                model.setValueAt(Q, jTable.getSelectedRow(), 4);
+            }
         }
     }//GEN-LAST:event_btModifActionPerformed
 
@@ -760,6 +776,21 @@ public class fenProduits extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void btAfficherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAfficherActionPerformed
+//            DefaultListModel model = (DefaultListModel) listSousCat.getModel();
+//            int taille = model.getSize();
+//            String souscat = "";
+//            if (taille > 0) {
+//                for (int i = 0; i < taille; i++) {
+//                    souscat = souscat + model.getElementAt(i) + "\n";
+//                }
+//                JOptionPane.showMessageDialog(null, "Sous-catégories :\n" + souscat, "Affichage des sous-catégories", JOptionPane.INFORMATION_MESSAGE);
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Aucun élément de sous catégorie dans cette catégorie", "Affichage sous catégorie", JOptionPane.INFORMATION_MESSAGE);
+//            }
+//            
+    }//GEN-LAST:event_btAfficherActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -797,6 +828,7 @@ public class fenProduits extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAPropos;
+    private javax.swing.JButton btAfficher;
     private javax.swing.JButton btAide;
     private javax.swing.JButton btAjout;
     private javax.swing.JButton btAjoutSousCat;
@@ -848,12 +880,12 @@ public class fenProduits extends javax.swing.JFrame {
         excel.write("\n");
         for (int i = 0; i < model.getRowCount(); i++) {
             for (int j = 0; j < model.getColumnCount(); j++) {
-                excel.write(model.getValueAt(i, j)+"\t");
-                
+                excel.write(model.getValueAt(i, j) + "\t");
+
             }
             excel.write("\n");
         }
-         excel.close();
+        excel.close();
         Desktop.getDesktop().open(fichier);
     }
 }
