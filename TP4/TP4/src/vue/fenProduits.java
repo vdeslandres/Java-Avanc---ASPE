@@ -826,7 +826,7 @@ public class fenProduits extends javax.swing.JFrame {
 
     private File choisirFichier() {
         FileDialog fd = new FileDialog(this, "Choose a file", FileDialog.LOAD);
-        fd.setDirectory("W:\\");
+        fd.setDirectory("C:\\");
         fd.setFile("*.xls");
         fd.setVisible(true);
         String filename = fd.getFile();
@@ -836,17 +836,18 @@ public class fenProduits extends javax.swing.JFrame {
 
     private void exporterExcel(JTable jTable, File fichier) throws IOException {
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        FileWriter fo = new FileWriter(fichier);
+        FileWriter excel = new FileWriter(fichier);
         for (int i = 0; i < model.getColumnCount(); i++) {
-            fo.write(model.getColumnName(i) + "\t");
+            excel.write(model.getColumnName(i) + "\t");
         }
-        fo.write("\n");
+        excel.write("\n");
         for (int i = 0; i < model.getRowCount(); i++) {
             for (int j = 0; j < model.getColumnCount(); j++) {
-                fo.write(model.getValueAt(i, j).toString() + "\t");
-                fo.write("\n");
+                excel.write(model.getValueAt(i, j)+"\t");
+                excel.write("\n");
             }
         }
+         excel.close();
         Desktop.getDesktop().open(fichier);
     }
 }
