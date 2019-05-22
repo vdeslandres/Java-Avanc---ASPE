@@ -11,8 +11,11 @@ import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.FileDialog;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
@@ -564,7 +567,7 @@ public class fenProduits extends javax.swing.JFrame {
             }
         }
         if (cbCat.getSelectedIndex() == 4) {
-            C = " Appareil Photo";
+            C = "Appareil Photo";
             if (!appPhoto.isEmpty()) {
                 if (listSousCat.getSelectedValue() == null) {
                     JOptionPane.showMessageDialog(this, "Aucune sous-catégorie n'a été sélectionnée", "Erreur de sélection", JOptionPane.INFORMATION_MESSAGE);
@@ -686,7 +689,7 @@ public class fenProduits extends javax.swing.JFrame {
             }
         }
         if (cbCat.getSelectedIndex() == 4) {
-            C = " Appareil Photo";
+            C = "Appareil Photo";
             if (!appPhoto.isEmpty()) {
                 if (listSousCat.getSelectedValue() == null) {
                     JOptionPane.showMessageDialog(this, "Aucune sous-catégorie n'a été sélectionnée", "Erreur de sélection", JOptionPane.INFORMATION_MESSAGE);
@@ -836,7 +839,9 @@ public class fenProduits extends javax.swing.JFrame {
 
     private void exporterExcel(JTable jTable, File fichier) throws IOException {
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        FileWriter excel = new FileWriter(fichier);
+        FileOutputStream fos = new FileOutputStream(fichier);
+        Writer excel = new OutputStreamWriter(fos, "UTF-32");
+
         for (int i = 0; i < model.getColumnCount(); i++) {
             excel.write(model.getColumnName(i) + "\t");
         }
@@ -844,8 +849,9 @@ public class fenProduits extends javax.swing.JFrame {
         for (int i = 0; i < model.getRowCount(); i++) {
             for (int j = 0; j < model.getColumnCount(); j++) {
                 excel.write(model.getValueAt(i, j)+"\t");
-                excel.write("\n");
+                
             }
+            excel.write("\n");
         }
          excel.close();
         Desktop.getDesktop().open(fichier);
