@@ -472,7 +472,7 @@ public class fenProduits extends javax.swing.JFrame {
         int[] selectedRows = jTable.getSelectedRows();
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
         if (jTable.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(this, "Aucune lmigne n'a été sélectionnée", "Erreur de sélection", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Aucune ligne n'a été sélectionnée", "Erreur de sélection", JOptionPane.INFORMATION_MESSAGE);
         } else {
             int input = JOptionPane.showConfirmDialog(this, "Supprimer la/les ligne(s) sélectionnée(s)?", "Suppression", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if (input == JOptionPane.OK_OPTION) {
