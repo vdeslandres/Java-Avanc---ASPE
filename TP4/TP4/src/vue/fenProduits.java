@@ -15,6 +15,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -66,8 +71,8 @@ public class fenProduits extends javax.swing.JFrame {
             casqueAudio.addElement(lesCasquesAudio[i]);
         }
 
-        son1 = java.applet.Applet.newAudioClip(url1);
-        son2 = java.applet.Applet.newAudioClip(url2);
+        //son1 = java.applet.Applet.newAudioClip(url1);
+        //son2 = java.applet.Applet.newAudioClip(url2);
 
         initComponents();
     }
@@ -100,6 +105,8 @@ public class fenProduits extends javax.swing.JFrame {
         textQuant = new javax.swing.JTextField();
         btSon1 = new javax.swing.JButton();
         btSon2 = new javax.swing.JButton();
+        btSon1bcl = new javax.swing.JButton();
+        btSon2bcl = new javax.swing.JButton();
         btSuppr = new javax.swing.JButton();
         btModif = new javax.swing.JButton();
         btAjout = new javax.swing.JButton();
@@ -121,7 +128,7 @@ public class fenProduits extends javax.swing.JFrame {
             }
         });
 
-        panCarac.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Caractéristiques produits", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 10))); // NOI18N
+        panCarac.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Caractéristiques produits", 0, 0, new java.awt.Font("Tahoma", 2, 10))); // NOI18N
 
         libLib.setText("Libellé");
 
@@ -235,19 +242,28 @@ public class fenProduits extends javax.swing.JFrame {
                 .addGap(43, 43, 43))
         );
 
-        btSon1.setText("Son 1 ");
+        btSon1.setText("Jouer le son 1 ");
         btSon1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSon1ActionPerformed(evt);
             }
         });
 
-        btSon2.setText("Son 2 ");
+        btSon2.setText("Jouer le son 2 ");
         btSon2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSon2ActionPerformed(evt);
             }
         });
+
+        btSon1bcl.setText("Jouer son 1 en boucle");
+        btSon1bcl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSon1bclActionPerformed(evt);
+            }
+        });
+
+        btSon2bcl.setText("Jouer Son 2 en boucle");
 
         btSuppr.setText("Supprimer");
         btSuppr.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -377,9 +393,15 @@ public class fenProduits extends javax.swing.JFrame {
                     .addComponent(panCarac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btSon2)
-                            .addComponent(btSon1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btSon2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btSon2bcl))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btSon1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btSon1bcl)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                         .addComponent(btSuppr)
                         .addGap(18, 18, 18)
                         .addComponent(btModif)
@@ -406,9 +428,13 @@ public class fenProduits extends javax.swing.JFrame {
                             .addComponent(btModif)
                             .addComponent(btAjout)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btSon1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btSon1)
+                            .addComponent(btSon1bcl))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btSon2)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btSon2)
+                            .addComponent(btSon2bcl))))
                 .addGap(18, 18, 18)
                 .addComponent(scrollTable, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -602,11 +628,37 @@ public class fenProduits extends javax.swing.JFrame {
 
 //Bouton son1
     private void btSon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSon1ActionPerformed
-        son1.play();
+        //son1.play();
+        Clip clip;
+        try {
+            clip = AudioSystem.getClip();
+
+            AudioInputStream ais;
+            ais = AudioSystem.getAudioInputStream(url1);
+            clip.open(ais);
+            clip.loop(1); // joue 2 fois le son (0 et 1)
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
+            Logger.getLogger(fenProduits.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("*** Erreur chargement du 1er son !");
+        }
+      
     }//GEN-LAST:event_btSon1ActionPerformed
 //Bouton son2
     private void btSon2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSon2ActionPerformed
-        son2.play();
+        //son2.play();
+      
+        Clip clip;
+        try {
+            clip = AudioSystem.getClip();
+
+            AudioInputStream ais;
+            ais = AudioSystem.getAudioInputStream(url1);
+            clip.open(ais);
+            clip.loop(1); // joue 2 fois le son (0 et 1)
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
+            Logger.getLogger(fenProduits.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("*** Erreur chargement du 1er son !");
+        }
     }//GEN-LAST:event_btSon2ActionPerformed
 
 //Ajouter une sous-catégorie
@@ -762,6 +814,15 @@ public class fenProduits extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void btSon1bclActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSon1bclActionPerformed
+//      Clip clip;
+//      clip = AudioSystem.getClip();
+//      if(btSon1bcl.getText() == "Jouer son 1 en boucle")
+//      {
+//         clip.open((AudioInputStream) son1); 
+//      }
+    }//GEN-LAST:event_btSon1bclActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -805,7 +866,9 @@ public class fenProduits extends javax.swing.JFrame {
     private javax.swing.JButton btAjoutSousCat;
     private javax.swing.JButton btModif;
     private javax.swing.JButton btSon1;
+    private javax.swing.JButton btSon1bcl;
     private javax.swing.JButton btSon2;
+    private javax.swing.JButton btSon2bcl;
     private javax.swing.JButton btSuppSousCat;
     private javax.swing.JButton btSuppr;
     private javax.swing.JComboBox<String> cbCat;
@@ -833,7 +896,7 @@ public class fenProduits extends javax.swing.JFrame {
     private File choisirFichier() {
         FileDialog fd = new FileDialog(this, "Choose a file", FileDialog.LOAD);
         fd.setDirectory("C:\\");
-        //fd.setFile("*.xlsm");
+        fd.setFile("*.xlsm");
         fd.setVisible(true);
         String filename = fd.getFile();
         File fichier = new File(fd.getDirectory() + fd.getFile());
