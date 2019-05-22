@@ -63,18 +63,10 @@
                   <Component id="panCarac" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btSon2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btSon2bcl" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btSon1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btSon1bcl" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="btSon2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btSon1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="129" max="32767" attributes="0"/>
+                      <EmptySpace pref="278" max="32767" attributes="0"/>
                       <Component id="btSuppr" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="btModif" min="-2" max="-2" attributes="0"/>
@@ -97,7 +89,6 @@
               <Component id="jToolBar1" min="-2" pref="25" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="panCarac" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
@@ -108,20 +99,14 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btSon1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btSon1bcl" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btSon1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btSon2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btSon2bcl" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btSon2" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="scrollTable" min="-2" pref="346" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="29" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -350,19 +335,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btSon2ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btSon1bcl">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Jouer son 1 en boucle"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btSon1bclActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btSon2bcl">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Jouer Son 2 en boucle"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btSuppr">
       <Properties>
         <Property name="text" type="java.lang.String" value="Supprimer"/>
@@ -429,17 +401,6 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btAfficher">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Afficher"/>
-            <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAfficherActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JButton" name="btAide">
           <Properties>
             <Property name="text" type="java.lang.String" value="Aide"/>

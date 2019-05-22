@@ -71,8 +71,8 @@ public class fenProduits extends javax.swing.JFrame {
             casqueAudio.addElement(lesCasquesAudio[i]);
         }
 
-        //son1 = java.applet.Applet.newAudioClip(url1);
-        //son2 = java.applet.Applet.newAudioClip(url2);
+        son1 = java.applet.Applet.newAudioClip(url1);
+        son2 = java.applet.Applet.newAudioClip(url2);
 
         initComponents();
     }
@@ -105,15 +105,12 @@ public class fenProduits extends javax.swing.JFrame {
         textQuant = new javax.swing.JTextField();
         btSon1 = new javax.swing.JButton();
         btSon2 = new javax.swing.JButton();
-        btSon1bcl = new javax.swing.JButton();
-        btSon2bcl = new javax.swing.JButton();
         btSuppr = new javax.swing.JButton();
         btModif = new javax.swing.JButton();
         btAjout = new javax.swing.JButton();
         scrollTable = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
-        btAfficher = new javax.swing.JButton();
         btAide = new javax.swing.JButton();
         btAPropos = new javax.swing.JButton();
         mbMenu = new javax.swing.JMenuBar();
@@ -128,7 +125,7 @@ public class fenProduits extends javax.swing.JFrame {
             }
         });
 
-        panCarac.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Caractéristiques produits", 0, 0, new java.awt.Font("Tahoma", 2, 10))); // NOI18N
+        panCarac.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Caractéristiques produits", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 10))); // NOI18N
 
         libLib.setText("Libellé");
 
@@ -256,15 +253,6 @@ public class fenProduits extends javax.swing.JFrame {
             }
         });
 
-        btSon1bcl.setText("Jouer son 1 en boucle");
-        btSon1bcl.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSon1bclActionPerformed(evt);
-            }
-        });
-
-        btSon2bcl.setText("Jouer Son 2 en boucle");
-
         btSuppr.setText("Supprimer");
         btSuppr.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -330,17 +318,6 @@ public class fenProduits extends javax.swing.JFrame {
         jToolBar1.setBorder(null);
         jToolBar1.setRollover(true);
 
-        btAfficher.setText("Afficher");
-        btAfficher.setFocusable(false);
-        btAfficher.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btAfficher.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btAfficher.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAfficherActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btAfficher);
-
         btAide.setText("Aide");
         btAide.setFocusable(false);
         btAide.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -393,15 +370,9 @@ public class fenProduits extends javax.swing.JFrame {
                     .addComponent(panCarac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btSon2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btSon2bcl))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btSon1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btSon1bcl)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
+                            .addComponent(btSon2)
+                            .addComponent(btSon1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 278, Short.MAX_VALUE)
                         .addComponent(btSuppr)
                         .addGap(18, 18, 18)
                         .addComponent(btModif)
@@ -419,7 +390,6 @@ public class fenProduits extends javax.swing.JFrame {
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panCarac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
@@ -428,16 +398,12 @@ public class fenProduits extends javax.swing.JFrame {
                             .addComponent(btModif)
                             .addComponent(btAjout)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btSon1)
-                            .addComponent(btSon1bcl))
+                        .addComponent(btSon1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btSon2)
-                            .addComponent(btSon2bcl))))
+                        .addComponent(btSon2)))
                 .addGap(18, 18, 18)
                 .addComponent(scrollTable, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -622,43 +588,15 @@ public class fenProduits extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             model.addRow(new Object[]{Lib, C, SC, Px, Q});
         }
-
-
     }//GEN-LAST:event_btAjoutActionPerformed
 
 //Bouton son1
     private void btSon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSon1ActionPerformed
-        //son1.play();
-        Clip clip;
-        try {
-            clip = AudioSystem.getClip();
-
-            AudioInputStream ais;
-            ais = AudioSystem.getAudioInputStream(url1);
-            clip.open(ais);
-            clip.loop(1); // joue 2 fois le son (0 et 1)
-        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
-            Logger.getLogger(fenProduits.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("*** Erreur chargement du 1er son !");
-        }
-      
+        son1.play();
     }//GEN-LAST:event_btSon1ActionPerformed
 //Bouton son2
     private void btSon2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSon2ActionPerformed
-        //son2.play();
-      
-        Clip clip;
-        try {
-            clip = AudioSystem.getClip();
-
-            AudioInputStream ais;
-            ais = AudioSystem.getAudioInputStream(url1);
-            clip.open(ais);
-            clip.loop(1); // joue 2 fois le son (0 et 1)
-        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
-            Logger.getLogger(fenProduits.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("*** Erreur chargement du 1er son !");
-        }
+        son2.play();
     }//GEN-LAST:event_btSon2ActionPerformed
 
 //Ajouter une sous-catégorie
@@ -685,11 +623,11 @@ public class fenProduits extends javax.swing.JFrame {
 
 //Handler de synchronisation
     private void synchroniser(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_synchroniser
-        String L, P, Q ,C , SC = " ";
+        String L, P, Q, C, SC = " ";
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
         L = (String) model.getValueAt(jTable.getSelectedRow(), 0);
         textLib.setText(L);
-        C =(String) model.getValueAt(jTable.getSelectedRow(), 1);
+        C = (String) model.getValueAt(jTable.getSelectedRow(), 1);
         cbCat.setSelectedItem(C);
         SC = (String) model.getValueAt(jTable.getSelectedRow(), 2);
         listSousCat.setSelectedValue(SC, rootPaneCheckingEnabled);
@@ -760,12 +698,21 @@ public class fenProduits extends javax.swing.JFrame {
         Lib = textLib.getText();
         Px = textPrix.getText();
         Q = textQuant.getText();
-        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        model.setValueAt(Lib, jTable.getSelectedRow(), 0);
-        model.setValueAt(C, jTable.getSelectedRow(), 1);
-        model.setValueAt(SC, jTable.getSelectedRow(), 2);
-        model.setValueAt(Px, jTable.getSelectedRow(), 3);
-        model.setValueAt(Q, jTable.getSelectedRow(), 4);
+        String regex = "[0-9]*";
+        if (Lib.equals("")) { //libellé vide
+            JOptionPane.showMessageDialog(this, "Le libellé est vide", "Erreur de saisie", JOptionPane.INFORMATION_MESSAGE);
+        } else if (!Px.matches(regex) || Px.equals("")) { // si prix vide, non numérique 
+            JOptionPane.showMessageDialog(this, "Le prix est vide ou erroné", "Erreur de saisie", JOptionPane.INFORMATION_MESSAGE);
+        } else if (!Q.matches(regex) || Q.equals("")) { // si prix vide, non numérique 
+            JOptionPane.showMessageDialog(this, "La quantité est vide ou erronée", "Erreur de saisie", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            model.setValueAt(Lib, jTable.getSelectedRow(), 0);
+            model.setValueAt(C, jTable.getSelectedRow(), 1);
+            model.setValueAt(SC, jTable.getSelectedRow(), 2);
+            model.setValueAt(Px, jTable.getSelectedRow(), 3);
+            model.setValueAt(Q, jTable.getSelectedRow(), 4);
+        }
     }//GEN-LAST:event_btModifActionPerformed
 
 //Bouton ToolBox Aide    
@@ -777,10 +724,6 @@ public class fenProduits extends javax.swing.JFrame {
     private void btAProposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAProposActionPerformed
         JOptionPane.showMessageDialog(this, "Gestion de produits version 1.0 \n Béatrice Rollet", "Version 1.0", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btAProposActionPerformed
-
-    private void btAfficherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAfficherActionPerformed
-
-    }//GEN-LAST:event_btAfficherActionPerformed
 
     private void miExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miExportActionPerformed
         try {
@@ -813,15 +756,6 @@ public class fenProduits extends javax.swing.JFrame {
             getContentPane().setLayout(null);
         }
     }//GEN-LAST:event_formWindowClosing
-
-    private void btSon1bclActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSon1bclActionPerformed
-//      Clip clip;
-//      clip = AudioSystem.getClip();
-//      if(btSon1bcl.getText() == "Jouer son 1 en boucle")
-//      {
-//         clip.open((AudioInputStream) son1); 
-//      }
-    }//GEN-LAST:event_btSon1bclActionPerformed
 
     /**
      * @param args the command line arguments
@@ -860,15 +794,12 @@ public class fenProduits extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAPropos;
-    private javax.swing.JButton btAfficher;
     private javax.swing.JButton btAide;
     private javax.swing.JButton btAjout;
     private javax.swing.JButton btAjoutSousCat;
     private javax.swing.JButton btModif;
     private javax.swing.JButton btSon1;
-    private javax.swing.JButton btSon1bcl;
     private javax.swing.JButton btSon2;
-    private javax.swing.JButton btSon2bcl;
     private javax.swing.JButton btSuppSousCat;
     private javax.swing.JButton btSuppr;
     private javax.swing.JComboBox<String> cbCat;
@@ -895,11 +826,11 @@ public class fenProduits extends javax.swing.JFrame {
 
     private File choisirFichier() {
         FileDialog fd = new FileDialog(this, "Choose a file", FileDialog.LOAD);
-        fd.setDirectory("C:\\");
-        fd.setFile("*.xlsm");
+        fd.setDirectory("W:\\");
+        fd.setFile("*.xls");
         fd.setVisible(true);
         String filename = fd.getFile();
-        File fichier = new File(fd.getDirectory() + fd.getFile());
+        File fichier = new File(fd.getDirectory() + filename);
         return fichier;
     }
 
