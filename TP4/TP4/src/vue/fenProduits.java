@@ -38,7 +38,6 @@ import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
  * @author Niakulu
  */
 public class fenProduits extends javax.swing.JFrame {
@@ -124,13 +123,14 @@ public class fenProduits extends javax.swing.JFrame {
         miQuitter = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gestion de produit");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
 
-        panCarac.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Caractéristiques produits", 0, 0, new java.awt.Font("Tahoma", 2, 10))); // NOI18N
+        panCarac.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Caractéristiques produits", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 10))); // NOI18N
 
         libLib.setText("Libellé");
 
@@ -604,6 +604,8 @@ public class fenProduits extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             model.addRow(new Object[]{Lib, C, SC, Px, Q});
         }
+        
+        //les prix et les quantité sont des int et non des float -> A améliorer
     }//GEN-LAST:event_btAjoutActionPerformed
 
 //Bouton son1
