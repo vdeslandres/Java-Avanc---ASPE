@@ -33,6 +33,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListModel;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
@@ -650,7 +651,6 @@ public class fenProduits extends javax.swing.JFrame {
         textPrix.setText(P);
         Q = (String) model.getValueAt(jTable.getSelectedRow(), 4);
         textQuant.setText(Q);
-
     }//GEN-LAST:event_synchroniser
 
 //Bouton Modifier
@@ -777,18 +777,18 @@ public class fenProduits extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void btAfficherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAfficherActionPerformed
-//            DefaultListModel model = (DefaultListModel) listSousCat.getModel();
-//            int taille = model.getSize();
-//            String souscat = "";
-//            if (taille > 0) {
-//                for (int i = 0; i < taille; i++) {
-//                    souscat = souscat + model.getElementAt(i) + "\n";
-//                }
-//                JOptionPane.showMessageDialog(null, "Sous-catégories :\n" + souscat, "Affichage des sous-catégories", JOptionPane.INFORMATION_MESSAGE);
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Aucun élément de sous catégorie dans cette catégorie", "Affichage sous catégorie", JOptionPane.INFORMATION_MESSAGE);
-//            }
-//            
+            ListModel model =   listSousCat.getModel();
+            int taille = model.getSize();
+            String souscat = "";
+            if (taille > 0) {
+                for (int i = 0; i < taille; i++) {
+                    souscat = souscat + model.getElementAt(i) + "\n";
+                }
+                JOptionPane.showMessageDialog(null, "Sous-catégories :\n" + souscat, "Affichage des sous-catégories", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Aucun élément de sous catégorie dans cette catégorie", "Affichage sous catégorie", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
     }//GEN-LAST:event_btAfficherActionPerformed
 
     /**
