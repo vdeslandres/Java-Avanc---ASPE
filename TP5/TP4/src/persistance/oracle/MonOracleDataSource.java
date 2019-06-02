@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package persistance.oracle;
 
 import java.io.FileInputStream;
@@ -10,41 +5,75 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Properties;
-import oracle.jdbc.datasource.OracleDataSource;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import oracle.jdbc.pool.OracleDataSource;
+import persistance.oracle.MonOracleDataSource;
 
 /**
+ * Classe DataSource pour une BD Oracle definie par le fichier de propriÃ©tÃ©s
+ * (singleton)
  *
- * @author Niakulu
+
  */
 public class MonOracleDataSource extends OracleDataSource {
 
-    MonOracleDataSource ods;
-    private MonOracleDataSource(){
+    private static MonOracleDataSource ods;
+
+    // constructeur privÃ© utilisÃ© dans getOracleDataSource()
+    // OracleDataSource throws java.sql.SQLException, on doit la mentionner :
+    private MonOracleDataSource() throws SQLException {
     }
-    }
-    public static MonOracleDataSource getOracleDataSource() throws IOException {
+
+    /**
+     * MÃ©thode statique qui renvoie l'unique instance de MonOracleDataSource
+     * construite Ã  partir du fichier de proprietes
+     *
+     * @return une instance de MonOracleDataSource
+     */
+    public static MonOracleDataSource getOracleDataSource() {
+
         if (ods == null) {
+
             FileInputStream fichier = null;
             Properties props = new Properties();
-            fichier = new FileInputStream("src/persistance/oracle/connOracle.properties");
-            3
-            props.load(fichier);
-            fichier.close();
+
             try {
-                ods = new MonOracleDataSource(); // on peut instancier à vide
-            } catch (SQLException ex) { // … OracleDataSource() peut lever cette exception
-                System.out.println("*** Erreur de CONNEXION ORACLE ...");
+                fichier = new FileInputStream("src/persistance/oracle/connOracle.properties");
+
+            } catch (FileNotFoundException ex1) {
+                System.out.println("Fichier de proprietes Oracle non trouvÃ©");
+                Logger.getLogger(MonOracleDataSource.class.getName()).log(Level.SEVERE, null, ex1);
             }
-// on construit la source de données :
+            try {
+                props.load(fichier);
+
+            } catch (IOException ex) {
+                System.out.println("Erreur lors du chargement du fichier de proprietes Oracle");
+                Logger.getLogger(MonOracleDataSource.class.getName()).log(Level.SEVERE, null, ex);
+
+            } finally {
+                try {
+                    fichier.close();
+                } catch (IOException ex) {
+                    System.out.print("ProblÃ¨me d'entree/sortie" + ex.getMessage());
+                }
+            }
+            try {
+                ods = new MonOracleDataSource();
+            } catch (SQLException ex) {
+                System.out.println("*** erreur de CONNEXION ORACLE ...");
+                Logger.getLogger(MonOracleDataSource.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             ods.setDriverType(props.getProperty("pilote"));
             ods.setPortNumber(new Integer(props.getProperty("port")));
             ods.setServiceName(props.getProperty("service"));
-            ods.setServerName(props.getProperty("Serveur"));
             ods.setUser(props.getProperty("user"));
             ods.setPassword(props.getProperty("pwd"));
+            ods.setServerName(props.getProperty("Serveur"));
         }
-// sinon, une instance de source de données existe deja, on la renvoie :
+        // sinon une instance de source de donnÃ©es existe deja, on la renvoie
         return ods;
-
     }
 }
