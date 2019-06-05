@@ -71,7 +71,7 @@ public class MonOracleDataSource extends OracleDataSource {
             ods.setServiceName(props.getProperty("service"));
             ods.setUser(props.getProperty("user"));
             ods.setPassword(props.getProperty("pwd"));
-            ods.setServerName(props.getProperty("Serveur"));
+            ods.setServerName(props.getProperty("serveur"));
         }
         // sinon une instance de source de donnÃ©es existe deja, on la renvoie
         return ods;
