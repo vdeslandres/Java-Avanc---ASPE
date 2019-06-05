@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Niakulu/Desktop/ASPE/Java-Avanc---ASPE/TP5/TP4/src/persistance/oracle/MonOracleDataSource.java</file>
-            <file>file:/C:/Users/Niakulu/Desktop/ASPE/Java-Avanc---ASPE/TP5/TP4/src/vue/fenProduits.java</file>
+            <file>file:/Z:/Java-Avanc---ASPE-master/Java-Avanc---ASPE-master/Java-Avanc---ASPE/TP5/TP4/src/vue/fenProduits.java</file>
+            <file>file:/Z:/Java-Avanc---ASPE-master/Java-Avanc---ASPE-master/Java-Avanc---ASPE/TP5/TP4/src/persistance/oracle/MonOracleDataSource.java</file>
+            <file>file:/Z:/Java-Avanc---ASPE-master/Java-Avanc---ASPE-master/Java-Avanc---ASPE/TP5/TP4/src/interfaceDAO/IArticleDAO.java</file>
+            <file>file:/Z:/Java-Avanc---ASPE-master/Java-Avanc---ASPE-master/Java-Avanc---ASPE/TP5/TP4/src/metier/Article.java</file>
+            <file>file:/Z:/Java-Avanc---ASPE-master/Java-Avanc---ASPE-master/Java-Avanc---ASPE/TP5/TP4/src/persistance/oracle/connOracle.properties</file>
+            <file>file:/Z:/Java-Avanc---ASPE-master/Java-Avanc---ASPE-master/Java-Avanc---ASPE/TP5/TP4/src/metier/ArticleDAO.java</file>
         </group>
     </open-files>
 </project-private>

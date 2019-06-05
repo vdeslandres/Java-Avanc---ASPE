@@ -9,7 +9,7 @@ import interfaceDAO.IArticleDAO;
 import java.awt.List;
 import java.sql.Connection;
 import java.util.ArrayList;
-import javax.activation.DataSource;
+
 
 /**
  *
@@ -25,7 +25,31 @@ public class ArticleDAO implements IArticleDAO{
 
     @Override
     public java.util.List<Article> getLesArticles() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+             st=connexionBD.createStatement();
+             rst=st.executeQuery("Select * from produits");
+             while(rst.next())
+             {
+                 int id=rst.getInt("ID_PRODUIT");
+                 String libelle=rst.getString("LIBELLE");
+                 String categorie =rst.getString("CATEGORIE");
+                 String sous_categorie=rst.getString("SOUS_CATEGORIE");
+                 int quantite=rst.getInt("QUANTITE");
+                 float prix=rst.getInt("PRIX");
+                 Article article= new Article(id,libelle,categorie,sous_categorie,quantite,prix);
+                 lesArticles.add(article);
+             }
+
+         } catch (SQLException ex) 
+         {
+             Logger.getLogger(ArticleDAO.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         if(connexionBD!=null)try {
+             connexionBD.close();
+         } catch (SQLException ex) {
+             Logger.getLogger(ArticleDAO.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        return LesArticles; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
